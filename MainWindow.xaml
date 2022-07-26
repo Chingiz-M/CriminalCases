@@ -1,0 +1,118 @@
+﻿<Window x:Class="CriminalCases.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CriminalCases"
+        xmlns:sm="clr-namespace:CriminalCases.StaticModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Обзор УД" WindowStartupLocation="CenterScreen" FontFamily="Bookman Old Style"
+            Height="300" Width="900"
+            MinHeight="200" MinWidth="800" Icon="/Icons/Cases.ico">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbCases, Path=IsEnabled}"
+                        Value="True">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Margin" Value="7"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Background" Value="#FFFFFCFC"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="51"/>
+            <RowDefinition Height="326*"/>
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top" Height="20">
+            <MenuItem Header="Меню">
+                <MenuItem x:Name="ConnectBD" Header="Подключение к БД" Click="ConnectBDAsync"/>
+                <Separator/>
+                <MenuItem x:Name="Exit" Header="Выход" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="MItemAdd" Header="Добавление">
+                <MenuItem x:Name="AddCrCase" Header="Уголовное дело" Click="AddCrCase_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddPersonItem" Header="Персона" Click="AddPersonItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddFigurantItem" Header="Фигурант" Click="AddFigurantItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddInvestigatorItem" Header="Следователь" Click="AddInvestigatorItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddAddressItem" Header="Адрес" Click="AddAddressItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddDivisionItem" Header="Подразделение" Click="AddDivisionItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddTelephoneItem" Header="Телефон" Click="AddTelephoneItem_Click" IsEnabled="False"/>
+                <MenuItem x:Name="AddBancnoteItem" Header="Банкнота" Click="AddBancnoteItem_Click" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem Header="Информация">
+                <MenuItem x:Name="AboutProgramm" Header="Опрограмме" Click="AboutProgramm_Click"/>
+            </MenuItem>
+        </Menu>
+        <Label Content="Уголовное дело:" Margin="10,26,0,0" Grid.Row="0" Style="{StaticResource style}" Height="26" Width="106"/>
+        <ComboBox x:Name="cbCases" Margin="121,26,0,0" Width="130" Style="{StaticResource style}"
+                  Height="22" IsEditable="True" StaysOpenOnEdit="True"
+                  IsEnabled="False"
+                  SelectionChanged="cbCases_SelectionChangedAsync"
+                  ItemsSource="{x:Static sm:StaticModeView.NumbersCriminalCases}"
+                  DisplayMemberPath="NumCase">
+        </ComboBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="btnMaterials" Click="btnMaterials_ClickAsync" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Материалы" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/documents.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnMoney" Click="btnMoney_ClickAsync">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Банкноты" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/Money.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnFigurants" Click="btnFigurants_ClickAsync">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Фигуранты" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/Figurants.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnInvestigators" Click="btnInvestigators_ClickAsync">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Следователи" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/Detective.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnInvestigation" Click="btnInvestigation_ClickAsync">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ход расследования" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/Investigation.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnSearch" Click="btnSearch_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Поиск" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Icons/lupa.ico" Margin="0,5,5,5"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <DataGrid x:Name="dgPlaces" Margin="10,10,10,10" AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="DarkGray"
+                  AlternatingRowBackground="#330000FF" Grid.Row="2"
+                  ItemsSource="{x:Static sm:StaticModeView.InfoCriminalCase}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ уголовного дела" Binding="{Binding NumCase}" MinWidth="50"/>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding DateStart}" MinWidth="50"/>
+                <DataGridTextColumn Header="Статья" Binding="{Binding Article}" MinWidth="200"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Title}" Width="300"/>
+                <DataGridTextColumn Header="Примечания" Binding="{Binding Remark}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

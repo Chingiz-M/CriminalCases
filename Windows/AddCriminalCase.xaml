@@ -1,0 +1,70 @@
+﻿<Window x:Class="CriminalCases.Windows.AddCriminalCase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:CriminalCases.Windows"
+        mc:Ignorable="d"
+        Title="Добавление уголовного дела" WindowStartupLocation="CenterScreen" FontFamily="Bookman Old Style"
+            Height="320" Width="360"
+            Icon="/Icons/add.ico" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="#FFFFFCFC"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="№ дела:" Margin="10"/>
+                <TextBox x:Name="tbNumCrCase" Width="250" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Дата начала:" Margin="10"/>
+                <xctk:DateTimeUpDown x:Name="dateEvent" Format="FullDateTime" Value="01.01.2021" 
+                             Margin="0,10,0,10"
+                             AllowTextInput="False"
+                             Width="219"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Статья:" Margin="10"/>
+                <TextBox x:Name="tbArticle" Width="252" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Заголовок:" Margin="10"/>
+                <TextBox x:Name="tbTitle" Width="233" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Примечание:" Margin="10"/>
+                <TextBox x:Name="tbRemark" Width="219" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnCancel" Click="btnCancel_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Отмена" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/cancel.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnClear" Click="btnClear_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Очистить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/clear.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnAdd" Click="btnAdd_ClickAsync">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Добавить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/add.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

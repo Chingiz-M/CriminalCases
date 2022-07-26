@@ -1,0 +1,27 @@
+﻿<Window x:Class="CriminalCases.Windows.Investigators"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CriminalCases.Windows"
+        xmlns:sm="clr-namespace:CriminalCases.StaticModel"
+        mc:Ignorable="d"
+        Title="Следователи" WindowStartupLocation="CenterScreen" FontFamily="Bookman Old Style"
+        Height="450" Width="800"
+        MinHeight="300" MinWidth="600" Icon="/Icons/Detective.ico" >
+    <Grid>
+        <DataGrid x:Name="dgPlaces" Margin="10,10,10,10" AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="DarkGray"
+                  AlternatingRowBackground="#330000FF"
+                  ItemsSource="{x:Static sm:StaticModeView.Investigators}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ Уголвного дела" Binding="{Binding StringCriminalCaseName}" MinWidth="200"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}" MinWidth="200"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding StringAddressName}" MinWidth="200"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding StringPhoneName}" Width="400"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

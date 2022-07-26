@@ -1,0 +1,109 @@
+﻿<Window x:Class="CriminalCases.Windows.AddFigurant"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sm="clr-namespace:CriminalCases.StaticModel"
+        xmlns:local="clr-namespace:CriminalCases.Windows"
+        mc:Ignorable="d"
+        Title="Добавление фигуранта" WindowStartupLocation="CenterScreen" FontFamily="Bookman Old Style"
+            Height="320" Width="760"
+            Icon="/Icons/add.ico" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Background" Value="#FFFFFCFC"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Персона:" Margin="10"/>
+                <ComboBox x:Name="cbPersons" Width="238" Margin="0,10"
+                 SelectedIndex="0"                         
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Persons}"
+                  DisplayMemberPath="Fio">
+                </ComboBox>
+                <Label Content="Статус:" Margin="10"/>
+                <ComboBox x:Name="cbStatus" Margin="10" SelectedIndex="0" Width="170">
+                    <ComboBoxItem Content="Обвинение"/>
+                    <ComboBoxItem Content="Подозрение"/>
+                    <ComboBoxItem Content="Свидетель"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="1 телефон:" Margin="10"/>
+                <ComboBox x:Name="cbPhones1" Width="150" Margin="0,10"
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Phones}"
+                  DisplayMemberPath="Phone">
+                </ComboBox>
+                <Label Content="2 телефон:" Margin="10"/>
+                <ComboBox x:Name="cbPhones2" Width="150" Margin="0,10"                     
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Phones}"
+                  DisplayMemberPath="Phone">
+                </ComboBox>
+                <Label Content="3 телефон:" Margin="10"/>
+                <ComboBox x:Name="cbPhones3" Width="150" Margin="0,10"                   
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Phones}"
+                  DisplayMemberPath="Phone">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Адрес проживания:" Margin="10"/>
+                <ComboBox x:Name="cbAddressLiving" Width="584" Margin="0,10"                  
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Addresses}"
+                  DisplayMemberPath="Address">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Адрес регистрации:" Margin="10"/>
+                <ComboBox x:Name="cbAddressReg" Width="583" Margin="0,10"
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Addresses}"
+                  DisplayMemberPath="Address">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Паспорт:" Margin="10"/>
+                <TextBox x:Name="tbPassport" Width="168" Margin="0,10"/>
+                <Label Content="Вод/права:" Margin="10"/>
+                <TextBox x:Name="tbDrivePassport" Width="156" Margin="0,10"/>
+                <Label Content="Др.документ:" Margin="10"/>
+                <TextBox x:Name="tbOtherDoc" Width="113" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnCancel" Click="btnCancel_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Отмена" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/cancel.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnClear" Click="btnClear_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Очистить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/clear.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnAdd" Click="btnAdd_ClickAsync">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Добавить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/add.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

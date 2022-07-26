@@ -1,0 +1,82 @@
+﻿<Window x:Class="CriminalCases.Windows.AddInvestigation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sm="clr-namespace:CriminalCases.StaticModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:CriminalCases.Windows"
+        mc:Ignorable="d"
+        Title="Добавление изменений в расследовании" WindowStartupLocation="CenterScreen" FontFamily="Bookman Old Style"
+            Height="260" Width="380"
+            Icon="/Icons/add.ico" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="#FFFFFCFC"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Фигурант:" Margin="10"/>
+                <ComboBox x:Name="cbFigurants" Width="254" Margin="0,10"
+                 SelectedIndex="0"                         
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.FigurantsInInvestigation}"
+                  DisplayMemberPath="StringFIO">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Следователь:" Margin="10"/>
+                <ComboBox x:Name="cbInvestigators" Width="237" Margin="0,10"
+                 SelectedIndex="0"
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.InvestigatorsInInvestigation}"
+                  DisplayMemberPath="Fio">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Дата события:" Margin="10"/>
+                <xctk:DateTimeUpDown x:Name="dateEvent" Format="FullDateTime" Value="01.01.2021" 
+                             Margin="0,10,0,10"
+                             AllowTextInput="False"
+                             Width="228"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Подразделение:" Margin="10"/>
+                <ComboBox x:Name="cbDivisions" Width="221" Margin="0,10"
+                 SelectedIndex="0"
+                  Height="22"
+                  ItemsSource="{x:Static sm:StaticModeView.Divisions}"
+                  DisplayMemberPath="Name">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnCancel" Click="btnCancel_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Отмена" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/cancel.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnClear" Click="btnClear_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Очистить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/clear.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnAdd" Click="btnAdd_ClickAsync">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Добавить" VerticalAlignment="Center" Margin="5"/>
+                        <Image Source="/Icons/add.ico" Margin="0,5,5,5" Width="20"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
